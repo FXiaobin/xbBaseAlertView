@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
 
   spec.name         = "xbBaseAlertView"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "xbBaseAlertView."
   spec.description  = "自定义弹窗，xbBaseAlertView"
 

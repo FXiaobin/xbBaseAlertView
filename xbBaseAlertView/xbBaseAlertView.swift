@@ -50,14 +50,14 @@ public class xbBaseAlertConfig: NSObject {
     public var textViewBgColor: UIColor = xbBaseAlertView.hex(hexString: "#f8f8f8")
 }
 
-class xbBaseAlertView: UIView {
+public class xbBaseAlertView: UIView {
 
     private let kWidth = min(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
     private let kHeight = max(UIScreen.main.bounds.size.width, UIScreen.main.bounds.size.height)
    
     private var actionButtons: [UIButton] = []
     
-    public  typealias kBaseAlertViewButtonsClickedBlock = ((xbBaseAlertView, Int) -> Void)
+    public typealias kBaseAlertViewButtonsClickedBlock = ((xbBaseAlertView, Int) -> Void)
     public typealias kBaseAlertViewTextFieldDidChangedBlock = ((xbBaseAlertView, String) -> Void)
     public typealias kBaseAlertViewTextViewDidChangedBlock = ((xbBaseAlertView, String) -> Void)
     public typealias kBaseAlertViewCompletedBlock = ((xbBaseAlertView, Bool) -> Void)
@@ -406,9 +406,9 @@ class xbBaseAlertView: UIView {
 
 }
 
-extension xbBaseAlertView {
+public extension xbBaseAlertView {
  
-   public func show(completed: (() -> Void)? = nil) {
+   func show(completed: (() -> Void)? = nil) {
         
         guard let window = UIApplication.shared.keyWindow else {
             return
@@ -443,7 +443,7 @@ extension xbBaseAlertView {
         }
     }
     
-    public func dismiss(completed: (() -> Void)? = nil) {
+    func dismiss(completed: (() -> Void)? = nil) {
         self.transform = CGAffineTransform.identity
         self.bgMaskView.alpha = 1.0
         self.alpha = 1.0
@@ -464,19 +464,19 @@ extension xbBaseAlertView {
 }
 
 extension xbBaseAlertView: xbTextViewDelegate{
-    func xb_textViewDidChanged(textView: xbTextView, text: String?) {
+    public func xb_textViewDidChanged(textView: xbTextView, text: String?) {
         if let block = self.textViewBlock {
             block(self, self.textView.text)
         }
     }
     
-    func xb_textViewDidEndEditing(textView: xbTextView, text: String?) {
+    public func xb_textViewDidEndEditing(textView: xbTextView, text: String?) {
         if let block = self.textViewBlock {
             block(self, self.textView.text)
         }
     }
     
-    func xb_heightWith(textView: xbTextView, textHeight: CGFloat, textViewHeight: CGFloat) {
+    public func xb_heightWith(textView: xbTextView, textHeight: CGFloat, textViewHeight: CGFloat) {
         //debugPrint("textView height = \(textViewHeight)")
     }
 }
