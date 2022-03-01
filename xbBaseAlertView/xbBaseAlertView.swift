@@ -26,6 +26,9 @@ public class xbBaseAlertConfig: NSObject {
     /** 是否点击半透明背景弹窗的消失，默认不消失*/
     public var isTapDismiss: Bool = false
     
+    /** 右上角关闭按钮图标*/
+    public var closeIconName: String?
+    
     public var titleColor: UIColor = xbBaseAlertView.hex(hexString: "#2F343A")
     public var titleFont:  UIFont = UIFont.systemFont(ofSize: 18.0, weight: .bold)
     
@@ -111,6 +114,10 @@ public class xbBaseAlertView: UIView {
         initSettings()
         
         self.closeBtn.isHidden = !showClose
+        if let closeIcon = config.closeIconName {
+            self.closeBtn.setImage(UIImage(named: closeIcon), for: .normal)
+        }
+        
         
         self.titleLabel.text = title
         self.messageLabel.text = message
@@ -267,16 +274,19 @@ public class xbBaseAlertView: UIView {
             let btn: UIButton = self.actionButtons.first!
             btn.frame = CGRect(x: leftSpace, y: bottomH + itemTopMargin, width: itemW, height: itemH)
 
+            bottomH = btn.frame.maxY
+            
         }else if (self.actionButtons.count > 1) {
             itemW = (width - CGFloat(leftSpace * 2) - (CGFloat(self.actionButtons.count - 1) * itemSpace)) / CGFloat(self.actionButtons.count)
 
             for i in 0..<self.actionButtons.count{
                 let btn: UIButton = self.actionButtons[i]
                 btn.frame = CGRect(x: leftSpace + (itemW + itemSpace) * CGFloat(i), y: bottomH + itemTopMargin, width: itemW, height: itemH)
+                bottomH = btn.frame.maxY
             }
         }
 
-        let height: CGFloat = bottomH + (itemTopMargin + itemH + itemBottomMargin)
+        let height: CGFloat = bottomH + itemBottomMargin
         self.frame = CGRect(x: (kWidth - width) / 2.0 , y: (kHeight - height) / 2.0 , width: width, height: height)
 
     }
@@ -394,7 +404,7 @@ public class xbBaseAlertView: UIView {
     
     lazy var closeBtn: UIButton = {
         let btn: UIButton = UIButton(type: .custom)
-        btn.setImage(UIImage(named: "close_black"), for: .normal)
+        btn.setImage(UIImage(named: "xbAlert_close_black"), for: .normal)
         btn.addTarget(self, action: #selector(buttonAction(sender:)), for: .touchUpInside)
         btn.tag = 30000
         

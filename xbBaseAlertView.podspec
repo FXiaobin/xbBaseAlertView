@@ -2,7 +2,7 @@ Pod::Spec.new do |spec|
 
 
   spec.name         = "xbBaseAlertView"
-  spec.version      = "0.0.2"
+  spec.version      = "0.0.3"
   spec.summary      = "xbBaseAlertView."
   spec.description  = "自定义弹窗，xbBaseAlertView"
 
@@ -18,6 +18,9 @@ Pod::Spec.new do |spec|
   spec.source       = { :git => "https://github.com/FXiaobin/xbBaseAlertView.git", :tag => "#{spec.version}" }
 
   spec.source_files  = "xbBaseAlertView", "xbBaseAlertView/*.{swift}"
+
+  # spec.resource  = "icon.png"
+  spec.resources = "Resources/*.png"
 
   spec.requires_arc = true
   spec.dependency "xbTextView"

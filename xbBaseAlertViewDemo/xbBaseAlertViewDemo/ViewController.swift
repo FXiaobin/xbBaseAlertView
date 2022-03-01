@@ -45,7 +45,9 @@ class ViewController: UIViewController {
         
         config.messageFont = UIFont.italicSystemFont(ofSize: 18.0)
         
-        let av  = xbBaseAlertView(configure: config ,title: "提示", message: "俄乌边境冲突加剧", description: "", tfPlaceholder: "请输入评论内容", actionTitles: ["取消","发布"], showClose: false) { alert , index  in
+        config.closeIconName = "xbAlert_close"
+        
+        let av  = xbBaseAlertView(configure: config ,title: "提示", message: "俄乌边境冲突加剧", description: "", tfPlaceholder: "请输入评论内容", actionTitles: [], showClose: true) { alert , index  in
             print("index = \(index)")
             
         } textFieldDidChanged: { alert , text  in
